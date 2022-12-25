@@ -1,7 +1,9 @@
-#include "stm32f4xx_hal.h"
-#include <stdbool.h>
+extern "C" 
+{
+    #include "stm32f4xx_hal.h"
+}
 
-/*class DuoBlinker
+class DuoBlinker
 {
 public:
     explicit DuoBlinker(GPIO_TypeDef *gpioPort, const uint16_t &pin1, const uint16_t &pin2, const uint32_t &delay);
@@ -68,84 +70,58 @@ void DuoBlinker::go()
 
         HAL_Delay(this->delay);
     }
-}*/
+}
 
-int main()
+extern "C" 
 {
-    //DuoBlinker duoBlinker(GPIOB, GPIO_PIN_0, GPIO_PIN_1, 500);
-
-    //duoBlinker.go();
-
-    HAL_Init();
-
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-
-    GPIO_InitTypeDef gpio_init_struct =
+    int main()
     {
-        .Pin   = GPIO_PIN_0,
-        .Mode  = GPIO_MODE_OUTPUT_PP,
-        .Pull  = GPIO_PULLUP,
-        .Speed = GPIO_SPEED_FREQ_HIGH
-    };
+        DuoBlinker duoBlinker(GPIOB, GPIO_PIN_0, GPIO_PIN_1, 500);
 
-    HAL_GPIO_Init(GPIOB, &gpio_init_struct);
+        duoBlinker.go();
 
-    gpio_init_struct.Pin = GPIO_PIN_1;
-
-    HAL_GPIO_Init(GPIOB, &gpio_init_struct);
-
-    bool first_cycle = true;
-    while (true)
-    {
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-
-        if (!first_cycle)
-            HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
-
-        first_cycle = false;
-
-        HAL_Delay(500);
+        return 0;
     }
-}
 
-void SysTick_Handler(void)
-{
-  HAL_IncTick();
-}
+    void SysTick_Handler(void)
+    {
+        HAL_IncTick();
+    }
 
-void NMI_Handler(void)
-{
-}
+    void NMI_Handler(void)
+    {
+    }
 
-void HardFault_Handler(void)
-{
-  while (1) {}
-}
+    void HardFault_Handler(void)
+    {
+        while (1) {}
+    }
 
 
-void MemManage_Handler(void)
-{
-  while (1) {}
-}
+    void MemManage_Handler(void)
+    {
+        while (1) {}
+    }
 
-void BusFault_Handler(void)
-{
-  while (1) {}
-}
+    void BusFault_Handler(void)
+    {
+        while (1) {}
+    }
 
-void UsageFault_Handler(void)
-{
-  while (1) {}
-}
+    void UsageFault_Handler(void)
+    {
+        while (1) {}
+    }
 
-void SVC_Handler(void)
-{
-}
+    void SVC_Handler(void)
+    {
+    }
 
-void DebugMon_Handler(void)
-{
-}
+    void DebugMon_Handler(void)
+    {
+    }
 
-void PendSV_Handler(void)
-{
+    void PendSV_Handler(void)
+    {
+    }
 }
