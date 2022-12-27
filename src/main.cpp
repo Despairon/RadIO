@@ -1,4 +1,14 @@
-extern "C" 
+int main()
+{
+    while (true)
+    {
+
+    }
+
+    return 0;
+}
+
+/*extern "C" 
 {
     #include "stm32f4xx_hal.h"
 }
@@ -124,4 +134,4 @@ extern "C"
     void PendSV_Handler(void)
     {
     }
-}
+}*/
